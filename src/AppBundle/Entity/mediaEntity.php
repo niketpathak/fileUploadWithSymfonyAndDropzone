@@ -26,7 +26,9 @@ class mediaEntity
     private $id;
 
     /**
-     * ID of the resource requesting data
+     * This field is unused in this tutorial,
+     * But it can be used as a foreign key to store the ID of another entity
+     * in order to link it to this record/file instance
      * @ORM\Column(type="integer", nullable=true)
      */
     private $res_id = null;
