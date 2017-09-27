@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\mediaEntity;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -29,7 +30,7 @@ class DefaultController extends Controller
         $file = $request->files->get('file');
         // generate a new filename (safer, better approach)
         $fileName = md5(uniqid()).'.'.$file->guessExtension();
-        // to use original filename, use $fileName = $this->file->getClientOriginalName();
+        // to use original filename, use $fileName = $file->getClientOriginalName();
 
         // set your uploads directory
         $uploadDir = $this->get('kernel')->getRootDir() . '/../web/uploads/';
@@ -37,9 +38,21 @@ class DefaultController extends Controller
             mkdir($uploadDir, 0775, true);
         }
         if ($file->move($uploadDir, $fileName)) {
+            // get entity manager
+            $em = $this->getDoctrine()->getManager();
+
+            // create and set this mediaEntity
+            $mediaEntity = new mediaEntity();
+            $mediaEntity->setFileName($fileName);
+
+            // save the uploaded filename to database
+            $em->persist($mediaEntity);
+            $em->flush();
             $output['uploaded'] = true;
             $output['fileName'] = $fileName;
+            $output['originalFileName'] = $file->getClientOriginalName();
         };
+
         return new JsonResponse($output);
 
     }

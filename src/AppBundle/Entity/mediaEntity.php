@@ -29,7 +29,7 @@ class mediaEntity
      * ID of the resource requesting data
      * @ORM\Column(type="integer", nullable=true)
      */
-    private $res_id;
+    private $res_id = null;
 
     /**
      * Filename of the asset
