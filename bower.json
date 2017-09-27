@@ -1,0 +1,22 @@
+{
+  "name": "symfony JS file upload tutorial",
+  "authors": [
+    "Niket Pathak <niketpathak89@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "dropzone": "^5.1.1"
+  }
+}
