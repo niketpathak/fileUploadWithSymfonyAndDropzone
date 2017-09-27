@@ -26,7 +26,7 @@
         // init,configure dropzone
         Dropzone.autoDiscover = false;
         var dropzone_default = new Dropzone(".dropzone", {
-            url: 'http://xxxc.com' ,
+            url: '{{ path('fileuploadhandler') }}' ,
             maxFiles: 1,
             dictMaxFilesExceeded: 'Only 1 Image can be uploaded',
             acceptedFiles: 'image/*',
