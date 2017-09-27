@@ -50,7 +50,7 @@
                 this.on("success", function(file, response) {
                     iziToast.show({
                         title: 'Success!',
-                        message: 'File Uploaded Successfully',
+                        message: 'File Uploaded: <b>'+ response.originalFileName +'</b>.<br>Saved as ' + response.fileName,
                         color: 'green',
                         position: 'topCenter'
                     });
@@ -76,8 +76,8 @@
                         if (resp.deleted) {
                             iziToast.show({
                                 title: 'Deleted!',
-                                message: 'File deleted Successfully',
-                                color: 'red',
+                                message: 'Deleted File: <b>'+ fileName + '</b>.',
+                                color: 'yellow',
                                 position: 'topCenter'
                             });
                         } else if (resp.error) {
@@ -91,6 +91,16 @@
                     }).fail(function(resp) {
                         console.error('xhr failed', resp);
                         return false;
+                    });
+                });
+                // this event is required only to debug errors
+                this.on("error", function(file, errorMessage) {
+                    console.error('Error', errorMessage);
+                    iziToast.show({
+                        title: 'Upload Failed',
+                        message: errorMessage,
+                        color: 'red',
+                        position: 'topCenter'
                     });
                 });
             }
