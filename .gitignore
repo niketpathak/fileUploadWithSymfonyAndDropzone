@@ -15,3 +15,11 @@
 !var/SymfonyRequirements.php
 /vendor/
 /web/bundles/
+node_modules/
+bower_components/
+web/assets/vendor/
+web/uploads/
+.idea/
+web/assets/dist/
+composer.phar
+.htaccess
