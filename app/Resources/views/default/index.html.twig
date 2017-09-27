@@ -2,11 +2,12 @@
 
 {% block body %}
     <div id="wrapper">
-        <div id="container">
+        <h1>File Upload using Dropzone</h1>
+        <div id="container" class="row col-sm-10 col-sm-offset-1">
             {#{{ form_start(form) }}#}
             {#{{ form_widget(form) }}#}
             <div class="form-group">
-                <label class="col-sm-2 control-label required" for="">Default Image</label>
+                <label class="col-sm-2 control-label required" for="">Add Image</label>
                 <div class="col-sm-10">
                     <div class="dropzone"></div>
                 </div>
@@ -39,6 +40,14 @@
                 this.on("sending", function(file, xhr, formData) {
                     // send additional data with the file as POST data.
                     formData.append("key", "value");
+                });
+                this.on("success", function(file, response) {
+                    iziToast.show({
+                        title: 'Success!',
+                        message: 'File Uploaded Successfully',
+                        color: 'green',
+                        position: 'topCenter'
+                    });
                 });
                 this.on("removedfile", function(file) {
                     var ResourceId = $('.resource_ID').val();

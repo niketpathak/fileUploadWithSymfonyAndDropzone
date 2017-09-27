@@ -28,9 +28,8 @@ class DefaultController extends Controller
         $output = array('uploaded' => false);
         // get the file from the request object
         $file = $request->files->get('file');
-        // generate a new filename (safer, better approach)
+        // generate a new filename (safer, better approach), but to use original filename instead, use $fileName = $file->getClientOriginalName();
         $fileName = md5(uniqid()).'.'.$file->guessExtension();
-        // to use original filename, use $fileName = $file->getClientOriginalName();
 
         // set your uploads directory
         $uploadDir = $this->get('kernel')->getRootDir() . '/../web/uploads/';

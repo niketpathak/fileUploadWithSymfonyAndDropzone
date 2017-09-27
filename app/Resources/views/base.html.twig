@@ -5,6 +5,7 @@
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}
             <link rel="stylesheet" href="{{ asset('assets/vendor/bootstrap/dist/css/bootstrap.min.css') }}">
+            <link rel="stylesheet" href="{{ asset('assets/vendor/izitoast/dist/css/iziToast.min.css') }}">
             <link rel="stylesheet" href="{{ asset('assets/vendor/dropzone/dist/min/dropzone.min.css') }}">
         {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
@@ -14,6 +15,7 @@
         {% block javascripts %}
             <script src="{{ asset('assets/vendor/jquery/dist/jquery.min.js') }}"></script>
             <script src="{{ asset('assets/vendor/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+            <script src="{{ asset('assets/vendor/izitoast/dist/js/iziToast.min.js') }}"></script>
             <script src="{{ asset('assets/vendor/dropzone/dist/min/dropzone.min.js') }}"></script>
         {% endblock %}
     </body>
