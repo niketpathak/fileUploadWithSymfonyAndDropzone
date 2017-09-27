@@ -2,24 +2,25 @@
 
 {% block body %}
     <div id="wrapper">
-        <h1>File Upload using Dropzone</h1>
+        <h1 class="col-sm-offset-3">File Upload in Symfony using Dropzone</h1><hr>
         <div id="container" class="row col-sm-10 col-sm-offset-1">
             {#{{ form_start(form) }}#}
             {#{{ form_widget(form) }}#}
             <div class="form-group">
                 <label class="col-sm-2 control-label required" for="">Add Image</label>
                 <div class="col-sm-10">
-                    <div class="dropzone"></div>
+                    <div class="dropzone"></div>  {# This is the element which is used as a dropzone #}
                 </div>
             </div>
-            {#
-             Hidden fields used to store the id, filename of the inserted record.
-             These can also be inserted via your form as unmapped properties.
-             #}
+
+            {# Hidden fields used to store the id, filename of the inserted record.
+               These can also be inserted via your form as "unmapped" properties. #}
             <input type="hidden" id="linked_ID">
             <input type="hidden" id="fileName">
+
+            {# For this tutorial, Submit btn is disabled since it is not used.#}
             <div class="col-xs-4 pull-right">
-                <input type="submit" class="btn btn-block btn-primary" value="Add" />
+                <input type="submit" class="btn btn-block btn-primary" value="Submit" disabled="true"/>
             </div>
             {#{{ form_end(form) }}#}
 
@@ -50,7 +51,7 @@
                 this.on("success", function(file, response) {
                     iziToast.show({
                         title: 'Success!',
-                        message: 'File Uploaded: <b>'+ response.originalFileName +'</b>.<br>Saved as ' + response.fileName,
+                        message: 'File Uploaded: <b>'+ response.originalFileName +'</b>.<br>Saved as ' + response.fileName +'<br>Inserted MediaEntity Id: <b>' + response.mediaEntityId +'</b>',
                         color: 'green',
                         position: 'topCenter'
                     });

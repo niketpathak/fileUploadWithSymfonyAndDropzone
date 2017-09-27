@@ -69,6 +69,12 @@ class DefaultController extends Controller
         if ($fileName && $media && $media instanceof mediaEntity) {
             $uploadDir = $this->get('kernel')->getRootDir() . '/../web/uploads/';
             $output['deleted'] = unlink($uploadDir.$fileName);
+            if ($output['deleted']) {
+                // delete linked mediaEntity
+                $em = $this->getDoctrine()->getManager();
+                $em->remove($media);
+                $em->flush();
+            }
         } else {
             $output['error'] = 'Missing/Incorrect Media ID and/or FileName';
         }
