@@ -12,6 +12,9 @@
                     <div class="dropzone"></div>
                 </div>
             </div>
+            {# hidden fields to store the id, filename of the inserted entity #}
+            <input type="hidden" id="linked_ID">
+            <input type="hidden" id="fileName">
             <div class="col-xs-4 pull-right">
                 <input type="submit" class="btn btn-block btn-primary" value="Add" />
             </div>
@@ -48,19 +51,40 @@
                         color: 'green',
                         position: 'topCenter'
                     });
+                    // set the id,filename from the response
+                    $('#fileName').val(response.fileName);
+                    $('#linked_ID').val(response.mediaEntityId);
+
                 });
                 this.on("removedfile", function(file) {
-                    var ResourceId = $('.resource_ID').val();
+                    var fileName = $('#fileName').val();
+                    var linkedId = $('#linked_ID').val();
 
                     // Delete file from server
                     $.ajax({
                         type: 'POST',
-                        url: '',
+                        url: '{{ path('deleteFileResource') }}',
                         data: {
-                            id: ResourceId,
+                            id: linkedId,
+                            fileName: fileName
                         },
                         dataType: 'json'
                     }).done(function (resp) {
+                        if (resp.deleted) {
+                            iziToast.show({
+                                title: 'Deleted!',
+                                message: 'File deleted Successfully',
+                                color: 'red',
+                                position: 'topCenter'
+                            });
+                        } else if (resp.error) {
+                            iziToast.show({
+                                title: 'Error!',
+                                message: resp.error,
+                                color: 'red',
+                                position: 'topCenter'
+                            });
+                        }
                     }).fail(function(resp) {
                         console.error('xhr failed', resp);
                         return false;

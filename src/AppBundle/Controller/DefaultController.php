@@ -49,11 +49,30 @@ class DefaultController extends Controller
             $em->flush();
             $output['uploaded'] = true;
             $output['fileName'] = $fileName;
+            $output['mediaEntityId'] = $mediaEntity->getId();
             $output['originalFileName'] = $file->getClientOriginalName();
         };
 
         return new JsonResponse($output);
 
+    }
+
+    /**
+     * @Route("/deletefileresource", name="deleteFileResource")
+     */
+    public function deleteResource(Request $request){
+        $output = array('deleted' => false, 'error' => false);
+        $mediaID = $request->get('id');
+        $fileName = $request->get('fileName');
+        $em = $this->getDoctrine()->getManager();
+        $media = $em->find('AppBundle:mediaEntity', $mediaID);
+        if ($fileName && $media && $media instanceof mediaEntity) {
+            $uploadDir = $this->get('kernel')->getRootDir() . '/../web/uploads/';
+            $output['deleted'] = unlink($uploadDir.$fileName);
+        } else {
+            $output['error'] = 'Missing/Incorrect Media ID and/or FileName';
+        }
+        return new JsonResponse($output);
     }
 
 }
