@@ -13,5 +13,5 @@ before this to see the Raw sql queries that will be executed.
 Drag-drop any image file in the dropzone to upload it. 
 The Uploaded file should appear in `web/uploads/` directory.
 
-Follow the detailed tutorial at [DigitalFortress](http://digitalfortress.niketpathak.com/js/js-file-upload-dropzone-symfony/) in case you run into any errors.
+Follow the detailed tutorial at [DigitalFortress](http://digitalfortress.tech/js/js-file-upload-dropzone-symfony/) in case you run into any errors.
 
